@@ -12,3 +12,9 @@ The first step is to download the map [here](https://geo.btaa.org/catalog/p16022
 ![Georeferencing in QGIS](screenshots/2_georeference.png)
 
 As shown in the screenshot above, I rubbersheeted the scanned Yosemite map by locating a series of six control points shared between the scanned map in the Georeferencer and the Esri Topo World basemap in the QGIS map window. If you are lucky, the map you wish to georeference will have latitude and longitude lines, and you can enter more accurate coordinates for your points at their intersections. However, in this case, I had to locate a few prominent shared features. For my transformation settings, I used a thin plate spline transformation type and a cubic spline resampling method. I find these settings best for older maps, especially when the projection is unknown.
+
+## Download Raster Elevation Data, Merge, and Clip
+
+Next, you will need some raster elevation data at an appropriate resolution for the area of interest. I downloaded two hgt files from a collection called ["NASA Shuttle Radar Topography Mission Global 1 arc second V003"](https://search.earthdata.nasa.gov/search/granules?p=C2763266360-LPCLOUD&pg[0][v]=f&pg[0][gsk]=-start_date&sb[0]=-119.70264%2C37.47469%2C-119.1709%2C38.2173&tl=1731453010.335!3!!&lat=37.82208275504045&long=-121.453857421875&zoom=7) at NASA's [Earthdata Search](https://search.earthdata.nasa.gov/search) as shown in the image below.
+
+![NASA Earthdata](screenshots/3_nasa_elevation.png)
