@@ -22,3 +22,7 @@ Next, you will need some raster elevation data at an appropriate resolution for 
 Then, drag and drop the two raster hgt files into QGIS. You will need to stitch these two files together using the Merge tool, located at Raster > Miscellaneous > Merge within the dropdown options at the top. The merged image will exceed the extent of the shaded relief map, but you can clip the result by creating and using a mask layer. Choose Layer > Create Layer > New Shapefile Layer from the dropdown options at the top and trace the border of the mapped region, as shown below.
 
 ![Mask Layer](screenshots/4_mask.png)
+
+Now, Open Raster > Extraction > Clip Raster by Mask Layer. Enter the merged elevation raster as the input layer and the newly created shapefile as the mask layer. Run the tool. The result should look something like the following screenshot.
+
+![Clipped Elevation Raster](screenshot/5_clip_rasters.png)
