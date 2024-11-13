@@ -26,3 +26,36 @@ Then, drag and drop the two raster hgt files into QGIS. You will need to stitch 
 Now, Open Raster > Extraction > Clip Raster by Mask Layer. Enter the merged elevation raster as the input layer and the newly created shapefile as the mask layer. Run the tool. The result should look something like the following screenshot. You may notice a black edge in the output elevation raster overlapping the frame bordering the map. This is fine because these cells carry an elevation value of 0 and this part of the resulting three dimensional map will remain flat.
 
 ![Clipped Elevation Raster](screenshots/5_clip_rasters.png)
+
+## Define a Color and Elevation Range and Create an RGB.tif
+
+You will need to convert the elevation raster to a colorized tif file. This is not difficult, but it does require you to have gdal installed. If you do not have this installed, you can use [Homebrew on a Mac to do so](https://formulae.brew.sh/formula/gdal) by pasting and execulting the following command in Terminal:
+
+```
+brew install gdal
+```
+
+Next, in Terminal, cd to the folder containing your clipped raster elevation file and create a txt file called color_relief.txt with the following command:
+
+```
+touch color_relief.txt
+```
+
+Now, open up this file and enter the following text:
+
+```
+0 68 1 84
+3988 253 231 37
+```
+
+Here you will see the initial numeric values of 0 and 3988. This is the full range of elevation contained in the raster in meters. To the right of these two values are three additional numbers. These are the RGB values that define the beginning and end of the color range applied to the raster. I cannot say the reason why, but processing the raster in this way will lead to a smooth end result with no spikes or cave-ins in the three dimensional terrain. Please let me know if you know why this is the case!
+
+Finally, you need to return to Terminal to run the following gdaldem command on your clipped elevation raster. Make sure you cd to the path of the folder holding your raster and change "input_dem.tif" and "output_rgb.tif" to the names of your own files.
+
+```
+gdaldem color-relief input_dem.tif color_relief.txt output_rgb.tif
+```
+
+If you executed the command correctly, you should see an output file that looks like the image below.
+
+![Output RGB File](screenshots/7_output_rgb.png)
