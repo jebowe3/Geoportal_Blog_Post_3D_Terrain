@@ -23,6 +23,6 @@ Then, drag and drop the two raster hgt files into QGIS. You will need to stitch 
 
 ![Mask Layer](screenshots/4_mask.png)
 
-Now, Open Raster > Extraction > Clip Raster by Mask Layer. Enter the merged elevation raster as the input layer and the newly created shapefile as the mask layer. Run the tool. The result should look something like the following screenshot.
+Now, Open Raster > Extraction > Clip Raster by Mask Layer. Enter the merged elevation raster as the input layer and the newly created shapefile as the mask layer. Run the tool. The result should look something like the following screenshot. You may notice a black edge in the output elevation raster overlapping the frame bordering the map. This is fine because these cells carry an elevation value of 0 and this part of the resulting three dimensional map will remain flat.
 
 ![Clipped Elevation Raster](screenshots/5_clip_rasters.png)
