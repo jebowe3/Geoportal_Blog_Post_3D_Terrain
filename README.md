@@ -59,3 +59,21 @@ gdaldem color-relief input_dem.tif color_relief.txt output_rgb.tif
 If you executed the command correctly, you should see an output file that looks like the image below.
 
 ![Output RGB File](screenshots/7_output_rgb.png)
+
+## Create PMTiles
+
+Now that you have both a georeferenced map and an rgb tif, you need to generate pmtiles from each of these for use with a MapLibre GL JS web map application. First, before you generate the pmtiles, you should create mbtiles. To do so, you will need [rio-mbtiles](https://github.com/mapbox/rio-mbtiles). Open Terminal in the folder holding your data. For the rgb tif, use the following command to generate mbtiles:
+
+```
+rio mbtiles output_rgb.tif output_rgb.mbtiles --format PNG --zoom-levels 0..14 --tile-size 256 --resampling bilinear
+```
+
+Next, you will need the [pmtiles command line tool](https://formulae.brew.sh/formula/pmtiles). To convert the output mbtiles to pmtiles, just use the following command in Terminal:
+
+```
+pmtiles convert output_rgb.mbtiles output_rgb.pmtiles
+```
+
+You can repeat this process for the georeferenced relief map.
+
+## Code the Application with MapLibre GL JS
