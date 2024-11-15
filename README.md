@@ -82,3 +82,103 @@ Now that you have all the files needed to generate the map, you will want to set
 
 ![Project Directory Structure](screenshots/8_structure.png)
 
+Open the index.html file and paste the code below. You can read the comments within the code to find out more about what each section is doing. If your file names are different from mine, make sure to change these in the code.
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Yosemite National Park</title>
+  <script src="https://unpkg.com/maplibre-gl@2.4.0/dist/maplibre-gl.js"></script>
+  <link href="https://unpkg.com/maplibre-gl@2.4.0/dist/maplibre-gl.css" rel="stylesheet" />
+  <script src="https://unpkg.com/pmtiles@2.5.0/dist/index.js"></script>
+  <style>
+    /* Define dimensions for the body of the page */
+    body {
+      margin: 0;
+      padding: 0;
+    }
+
+    /* Make the map fill the body of the page */
+    #map {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      width: 100%;
+    }
+  </style>
+</head>
+<body>
+  <div id="map"></div>
+  <script>
+
+    let protocol = new pmtiles.Protocol();
+    maplibregl.addProtocol("pmtiles",protocol.tile);
+    //let URL = "OUTPUT.pmtiles";
+    const map = new maplibregl.Map({
+      container: 'map', // container id
+      style: {
+        version: 8,
+        sources: {
+          /* The topo source is the pmtiles for the scanned map downloaded from the geoportal. You can name these sources anything as long as your names are consistent throughout. */
+          topo: {
+            type: "raster",
+            url: "pmtiles://tiles/yosemite_topo.pmtiles", /* make sure to use your own file name here */
+            tileSize: 256,
+            minzoom: 0,
+            maxzoom: 14,
+          },
+          // The terrain source should be the rgb elevation tiles
+          terrainSource: {
+            type: "raster-dem",
+            url: "pmtiles://tiles/yosemite_rgb.pmtiles", /* make sure to use your own file name here */
+            tileSize: 256,
+          }
+        },
+        /* In this case, there is only one layer, which uses the topo source identified previously */        
+        layers: [
+          {
+            id: "topo",
+            type: "raster",
+            source: "topo",
+          }
+        ],
+        /* The terrain uses the terrain source identified previously */
+        terrain: {
+          source: "terrainSource",
+          exaggeration: 0.005, /* adjust the exaggeration to your liking */
+        },
+      },
+      center: [-119.481452, 37.75339], /* add the center coordinates for your data */
+      zoom: 9, /* the initial zoom */
+      pitch: 40, /* the initial pitch */
+      bearing: 0, /* the initial bearing */
+      maxPitch: 85, /* the maximum allowed pitch */
+      maxZoom: 14 /* the maximum allowed zoom */
+    });
+
+    /* Add a navigation control to adjust zoom, pitch, and bearing */
+    map.addControl(
+      new maplibregl.NavigationControl({
+        visualizePitch: true,
+        showZoom: true,
+        showCompass: true,
+      })
+    );
+
+    /* Add a terrain control to allow users to toggle the 3D terrain */
+    map.addControl(
+      new maplibregl.TerrainControl({
+        source: "terrainSource",
+        exaggeration: 0.005, /* match to the exaggeration defined previously */
+      })
+    );
+
+  </script>
+</body>
+</html>
+```
+
+After this, you should have a working interactive 3D terrain map of the scanned historic map of Yosemite National Park downloaded from the [BTAA Geoportal](https://geo.btaa.org/) using the [MapLibre GL JS](https://maplibre.org/maplibre-gl-js/docs/) TypeScript library. Enjoy your 3D mapping!
