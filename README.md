@@ -182,3 +182,5 @@ Open the index.html file and paste the code below. You can read the comments wit
 ```
 
 After this, you should have a working interactive 3D terrain map of the scanned historic map of Yosemite National Park downloaded from the [BTAA Geoportal](https://geo.btaa.org/) using the [MapLibre GL JS](https://maplibre.org/maplibre-gl-js/docs/) TypeScript library. Enjoy your 3D mapping!
+
+![3D Map of Yosemite National Park](screenshots/9_result.png)
