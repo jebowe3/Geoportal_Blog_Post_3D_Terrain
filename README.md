@@ -77,3 +77,8 @@ pmtiles convert output_rgb.mbtiles output_rgb.pmtiles
 You can repeat this process for the georeferenced relief map.
 
 ## Code the Application with MapLibre GL JS
+
+Now that you have all the files needed to generate the map, you will want to set up your project folder with an "index.html" file and a subdirectory for the pmtiles.
+
+![Project Directory Structure](screenshots/8_structure.png)
+
