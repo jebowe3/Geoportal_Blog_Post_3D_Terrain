@@ -152,7 +152,7 @@ Open the index.html file and paste the code below. You can read the comments wit
         },
       },
       center: [-119.481452, 37.75339], /* add the center coordinates for your data */
-      zoom: 9, /* the initial zoom */
+      zoom: 10, /* the initial zoom */
       pitch: 40, /* the initial pitch */
       bearing: 0, /* the initial bearing */
       maxPitch: 85, /* the maximum allowed pitch */
